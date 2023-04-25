@@ -4,6 +4,7 @@ import sys
 import pygame as pg
 
 
+# 4
 delta = {
         pg.K_UP: (0,-1),
         pg.K_DOWN: (0,+1),
@@ -34,18 +35,18 @@ def main():
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
     kk_img = pg.transform.rotozoom(kk_img, 0, 2.0)
-    kk_rct = kk_img.get_rect()
-    kk_rct.center = 900, 400
+    kk_rct = kk_img.get_rect() # 4
+    kk_rct.center = 900, 400 # 4
 
     bb_img = pg.Surface((20,20))
-    pg.draw.circle(bb_img,(255,0,0),(10,10),10)  # 爆弾
-    bb_img.set_colorkey((0,0,0))  # 爆弾よすみ
+    pg.draw.circle(bb_img,(255,0,0),(10,10),10)  # 爆弾 
+    bb_img.set_colorkey((0,0,0))  # 爆弾よすみ 
     x, y = random.randint(0,1600), random.randint(0,900)
-    vx, vy = +1, +1 # 速度
-    bb_rct = bb_img.get_rect()
-    bb_rct.center = x, y
+    accs = [a for a in range(1,11)] 
+    vx, vy = +1, +1 # 速度 
+    bb_rct = bb_img.get_rect() # 3
+    bb_rct.center = x, y # 3
     tmr = 0
-    
 
     while True:
         for event in pg.event.get():
@@ -55,7 +56,8 @@ def main():
         tmr += 1
 
         key_lst = pg.key.get_pressed()
-        for k,mv in delta.items():
+        for k,mv in delta.items():    
+            #avx, avy = vx*accs[min(tmr//1000, 9)], vy*accs[min(tmr//1000, 9)]        
             if key_lst[k]:
                 kk_rct.move_ip(mv)
         if check_bound(screen.get_rect(),kk_rct) != (True,True):
