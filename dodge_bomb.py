@@ -1,9 +1,11 @@
-import pygame as pg
+import random
 import sys
+
+import pygame as pg
 
 def main():
     pg.display.set_caption("逃げろ！こうかとん")
-    screen = pg.display.set_mode((1600, 600))
+    screen = pg.display.set_mode((1600, 900))
     clock = pg.time.Clock()
     bg_img = pg.image.load("ex02/fig/pg_bg.jpg")
     kk_img = pg.image.load("ex02/fig/3.png")
@@ -11,6 +13,7 @@ def main():
     bb_img = pg.Surface((20,20))
     pg.draw.circle(bb_img,(255,0,0),(10,10),10)  # 爆弾
     bb_img.set_colorkey((0,0,0))  #爆弾よすみ
+    x, y = random.randint(0,1600), random.randint(0,600)
     tmr = 0
     
 
@@ -22,7 +25,7 @@ def main():
         tmr += 1
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
-        screen.blit(bb_img, [600, 200])
+        screen.blit(bb_img, [x, y])
 
         pg.display.update()
         clock.tick(1000)
